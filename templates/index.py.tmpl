@@ -1,0 +1,28 @@
+from .resource import (
+	{{ .Service }}Resource,
+	Async{{ .Service }}Resource,
+{{- range .ResourceTypeNames }}
+	{{ . }},
+{{- end }}
+)
+{{- with .TypeNames }}
+from .types import (
+{{- range . }}
+	{{ . }},
+{{- end }}
+)
+{{- end }}
+
+
+__all__ = [
+	"{{ .Service }}Resource",
+	"Async{{ .Service }}Resource",
+{{- range .ResourceTypeNames }}
+	"{{ . }}",
+{{- end }}
+{{- with .TypeNames }}
+{{- range . }}
+	"{{ . }}",
+{{- end }}
+{{- end }}
+]
